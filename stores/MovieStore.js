@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue';
 
-import { watch, onBeforeUnmount } from "vue";
-import debounce from "lodash.debounce";
+//import { watch, onBeforeUnmount } from "vue";
+//import debounce from "lodash.debounce";
 
 
 export const useMovieStore = defineStore('movieStore', {
@@ -59,6 +59,7 @@ export const useMovieStore = defineStore('movieStore', {
           return item.id === movie.id;
       });
     },
+
     toggleFav (movie) {
       const isFavorite = ref(Boolean);
       isFavorite.value = this.favMovies.includes(movie);
@@ -80,39 +81,50 @@ export const useMovieStore = defineStore('movieStore', {
       // this.$auth.$storage.setCookie('favorite-movies', JSON.stringify(favoritesObject))
       // localStorage.setItem('favorite-movies', JSON.stringify(favoritesObject));
     },
-    SearchShows(search) {
-      if (search && search.length >= 3) {
-        const searchUrl = `${this.baseUrl}search/tv?${this.apiKey}&query=${search}`;
-
-        fetch(searchUrl).then(response => response.json()).then(data => {
-            this.searchResults = data.results;
-
-            // console.log("searches...",this.searchResults)
-            // search="";
-        });
-      }
-    },
     SearchMovies(search) {
+      console.log(search);
+      console.log(search.value);
+      // console.log(search['_value']);
+
       if (search.value && search.value.length >= 3) {
         console.log(search.value);
 
-        const searchUrl = `${this.baseUrl}search/movie?${this.apiKey}&query=${search}`;
+        const searchUrl = `${this.baseUrl}search/movie?${this.apiKey}&query=${search.value}`;
 
         console.log(searchUrl);
 
-        fetch(searchUrl).then(response => response.json()).then(data => {
-          console.log(data);
+        fetch(searchUrl).then(response => response.json()).then(data => {	
+          console.log(data);	
 
-          this.searchResults = data.results; // array name: results
-
+          this.searchResults = data.results; // array name: results	
           //search.value = "";
-          //console.log(movies.value);
         });
 
-        document.querySelector('form .list-1').classList.remove('hidden');
+        document.querySelector('form .list-1').classList.remove('hidden');	
       }
 
       // !search.value && document.querySelector('form .list-1').classList.add('hidden');
+    },
+  /*
+   SearchShows(search) {
+    if (search && search.length >= 3) {
+      console.log(search);
+
+      const searchUrl = `${this.baseUrl}search/tv?${this.apiKey}&query=${search}`;
+
+      console.log(searchUrl);
+
+      fetch(searchUrl).then(response => response.json()).then(data => {
+        console.log(data);
+
+        this.searchResults = data.results; // array name: results
+
+        console.log(this.searchResults);
+      });
+
+      document.querySelector('form .list-1').classList.remove('hidden');
     }
   }
+  */
+}
 })
