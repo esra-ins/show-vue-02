@@ -14,7 +14,7 @@
             <label class="h-[46px] w-full rounded-full">
                 <input class="w-full h-full rounded-full pl-2 text-black " v-model="search" label="Search" placeholder="Search for a movie, tv show, person......">
                 <div class="list-1 bg-white overflow-y-scroll h-[300px] hidden">
-                  <div class="movie p-4 text-black" v-for="movie in movieStore.popularMovies" :key="movie.id">
+                  <div class="movie p-4 text-black" v-for="movie in movieStore.searchResults" :key="movie.id">
                     {{movie.title}}
                     {{movie.vote_average}}
                     <!--  <img :src="movieStore.imgBaseUrl+movie.poster_path" />  -->

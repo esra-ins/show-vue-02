@@ -23,9 +23,11 @@ module.exports = {
       'dark-blue': '#063970',
       'white': '#ffffff',
       'black': '#000000',
-   },
+      },
     },
-   
+    variants: {
+      display:['group-hover']
+    }
   },
  
   plugins: [],
