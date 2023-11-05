@@ -1,8 +1,14 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue';
 
+<<<<<<< HEAD
 // import { watch, onBeforeUnmount } from "vue";
 // import debounce from "lodash.debounce";
+=======
+//import { watch, onBeforeUnmount } from "vue";
+//import debounce from "lodash.debounce";
+
+>>>>>>> 9a645ffb58ab8c27b96d5e9de43586d4ee83740e
 
 export const useMovieStore = defineStore('movieStore', {
   state: () => ({
@@ -114,7 +120,12 @@ export const useMovieStore = defineStore('movieStore', {
         return item.id === movie.id;
       });
     },
+<<<<<<< HEAD
     toggleFav(movie) {
+=======
+
+    toggleFav (movie) {
+>>>>>>> 9a645ffb58ab8c27b96d5e9de43586d4ee83740e
       const isFavorite = ref(Boolean);
       isFavorite.value = this.favMovies.includes(movie);
 
@@ -136,27 +147,40 @@ export const useMovieStore = defineStore('movieStore', {
       // localStorage.setItem('favorite-movies', JSON.stringify(favoritesObject));
     },
     SearchMovies(search) {
+<<<<<<< HEAD
       if (search && search.length >= 3) {
         console.log(search);
+=======
+      console.log(search);
+      console.log(search.value);
+      // console.log(search['_value']);
 
-        const searchUrl = `${this.baseUrl}search/movie?${this.apiKey}&query=${search}`;
+      if (search.value && search.value.length >= 3) {
+        console.log(search.value);
+>>>>>>> 9a645ffb58ab8c27b96d5e9de43586d4ee83740e
+
+        const searchUrl = `${this.baseUrl}search/movie?${this.apiKey}&query=${search.value}`;
 
         console.log(searchUrl);
 
-        fetch(searchUrl).then(response => response.json()).then(data => {
-          console.log(data);
+        fetch(searchUrl).then(response => response.json()).then(data => {	
+          console.log(data);	
 
-          this.searchResults = data.results; // array name: results
-
+<<<<<<< HEAD
 
           console.log(this.searchResults);
+=======
+          this.searchResults = data.results; // array name: results	
+          //search.value = "";
+>>>>>>> 9a645ffb58ab8c27b96d5e9de43586d4ee83740e
         });
 
-        document.querySelector('form .list-1').classList.remove('hidden');
+        document.querySelector('form .list-1').classList.remove('hidden');	
       }
 
       // !search.value && document.querySelector('form .list-1').classList.add('hidden');
     },
+<<<<<<< HEAD
     /*
     SearchShows(search) {
         if (search && search.length >= 3) {
@@ -178,5 +202,28 @@ export const useMovieStore = defineStore('movieStore', {
         }    
       }
       */
+=======
+  /*
+   SearchShows(search) {
+    if (search && search.length >= 3) {
+      console.log(search);
+
+      const searchUrl = `${this.baseUrl}search/tv?${this.apiKey}&query=${search}`;
+
+      console.log(searchUrl);
+
+      fetch(searchUrl).then(response => response.json()).then(data => {
+        console.log(data);
+
+        this.searchResults = data.results; // array name: results
+
+        console.log(this.searchResults);
+      });
+
+      document.querySelector('form .list-1').classList.remove('hidden');
+    }
+>>>>>>> 9a645ffb58ab8c27b96d5e9de43586d4ee83740e
   }
+  */
+}
 })

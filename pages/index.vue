@@ -102,12 +102,13 @@ export default {
     
   },
   setup() {
-    const search = ref("");
+    const search = ref('');
     const filter = ref('popular');
     const movieStore = useMovieStore();
     movieStore.getAll();
     
     const debouncedWatch = debounce(() => {
+      console.log('----------s');
       movieStore.SearchMovies(search);
     }, 500);
   
@@ -117,7 +118,7 @@ export default {
       debouncedWatch.cancel();
     })
    
-    const addToFav=(show)=>{
+    const addToFav = (show) => {
       console.log(show.name);
     }
  
