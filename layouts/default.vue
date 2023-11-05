@@ -52,12 +52,13 @@
 <style>
   .dropdown {
     position: relative;
-    width: 140px;
+    width: max-content;
   }
 
   .dropdown-menu {
     display: none;
     position: absolute;
+    width: max-content;
   }
 
   .dropdown:hover .dropdown-menu {
