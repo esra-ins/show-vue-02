@@ -52,7 +52,7 @@
 <style>
   .dropdown {
     position: relative;
-    width: max-content;
+    width: 150px;
   }
 
   .dropdown-menu {
