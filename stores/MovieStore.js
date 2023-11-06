@@ -92,8 +92,6 @@ export const useMovieStore = defineStore('movieStore', {
       })
 
       // http://api.themoviedb.org/3/discover/movie?&sort_by=popularity.desc&page=1&api_key=YOUR_API_KEY
-      // http://api.themoviedb.org/3/discover/movie?api_key=348088421ad3fb3a9d6e56bb6a9a8f80&sort_by=popularity.desc
-      // https://api.themoviedb.org/3/discover/movie?&sort_by=popularity.descapi_key=348088421ad3fb3a9d6e56bb6a9a8f80
     },
 
     isFavActive(movie) {
