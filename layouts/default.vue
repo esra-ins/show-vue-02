@@ -52,7 +52,7 @@
 <style>
   .dropdown {
     position: relative;
-    width: 151px;
+    width: 150px;
   }
 
   .dropdown-menu {

@@ -1,8 +1,7 @@
-import { defineStore } from 'pinia';
+import { defineStore } from 'pinia'
 import { ref } from 'vue';
-
-// import { watch, onBeforeUnmount } from "vue";
-// import debounce from "lodash.debounce";
+import { watch, onBeforeUnmount } from "vue";
+import debounce from "lodash.debounce";
 
 export const useMovieStore = defineStore('movieStore', {
   state: () => ({
@@ -20,6 +19,16 @@ export const useMovieStore = defineStore('movieStore', {
     popularityDescShows: [],
     popularityAscShows: [],
 
+    //start.....................................................................................................
+    /* comedyMovies: [], */
+    movieGenreList: [],
+    movieList: [],
+    movieList2: [],
+
+    showGenreList: [],
+    showList: [],
+    //end.....................................................................................................
+
     searchResults: [],
     apiKey: useRuntimeConfig().api_key,
     baseUrl: useRuntimeConfig().base_Url,
@@ -28,6 +37,7 @@ export const useMovieStore = defineStore('movieStore', {
     //favMovies: JSON.parse(localStorage.getItem('favorite-movies')) || [], // need to look LS
     favMovies: [],
     isFav: false,
+
   }),
   actions: {
     async getAll() {
@@ -91,6 +101,18 @@ export const useMovieStore = defineStore('movieStore', {
         this.popularityAscShows = data.results;
       })
 
+      //start............................................................................
+      const MovieGenreListUrl = `${this.baseUrl}genre/movie/list?language=en&${this.apiKey}`;
+
+      await fetch(MovieGenreListUrl).then(response => response.json()).then(data => {
+        this.movieGenreList = data.genres;
+      })
+
+      const ShowGenreListUrl = `${this.baseUrl}genre/tv/list?language=en&${this.apiKey}`;
+
+      await fetch(ShowGenreListUrl).then(response => response.json()).then(data => {
+        this.showGenreList = data.genres;
+      })
       // http://api.themoviedb.org/3/discover/movie?&sort_by=popularity.desc&page=1&api_key=YOUR_API_KEY
     },
 
@@ -133,50 +155,93 @@ export const useMovieStore = defineStore('movieStore', {
       // this.$auth.$storage.setCookie('favorite-movies', JSON.stringify(favoritesObject))
       // localStorage.setItem('favorite-movies', JSON.stringify(favoritesObject));
     },
+    GetMovieList(genre, sortedBy) {
+      console.log("sort", sortedBy)
+      //const movieGenreUrl = `${this.baseUrl}discover/movie?&with_genres=${genre.id}&sort_by=${sortedBy}&${this.apiKey}`;
+      // console.log(movieGenreUrl);
+
+      const movieGenreUrl = `${this.baseUrl}discover/movie?&with_genres=${genre.id}&${this.apiKey}`;
+
+      if (sortedBy = 'popularityAsc') {
+        //console.log("...inDesc");
+        fetch(movieGenreUrl).then(response => response.json()).then(data => {
+          this.movieList = data.results;
+
+          const arrAsc = this.movieList.sort(
+            (objA, objB) => Number(objA.popularity - objB.popularity),
+          );
+
+          this.movieList = arrAsc;
+        })
+      }
+
+      if (sortedBy = 'popularityDesc') {
+        // console.log("...inAsc");
+        fetch(movieGenreUrl).then(response => response.json()).then(data => {
+          this.movieList = data.results;
+
+          const arrDesc = this.movieList.sort(
+            (objA, objB) => Number(objB.popularity - objA.popularity),
+          );
+
+          this.movieList = arrDesc;
+        })
+      }
+    },
+    GetShowList(genre, sortedBy) {
+      console.log("sortedBy", sortedBy);
+
+      const showGenreUrl = `${this.baseUrl}discover/tv?&with_genres=${genre.id}&${this.apiKey}`;
+
+      if (sortedBy = 'popularityDesc') {
+        //console.log("...inDesc");
+        fetch(showGenreUrl).then(response => response.json()).then(data => {
+          this.showList = data.results;
+
+          const arrDesc = this.showList.sort(
+            (objA, objB) => Number(objB.popularity - objA.popularity),
+          );
+
+          this.showList = arrDesc;
+        })
+      }
+
+      if (sortedBy = 'popularityAsc') {
+        // console.log("...inAsc");
+        fetch(showGenreUrl).then(response => response.json()).then(data => {
+          this.showList = data.results;
+
+          const arrAsc = this.showList.sort(
+            (objA, objB) => Number(objA.popularity - objB.popularity),
+          );
+
+
+          this.showList = arrAsc;
+
+
+        })
+      }
+    },
     SearchMovies(search) {
-      console.log(search);
-      console.log(search.value);
-      // console.log(search['_value']);
+      if (search && search.length >= 3) {
+        console.log(search);
 
-      if (search.value && search.value.length >= 3) {
-        console.log(search.value);
-
-        const searchUrl = `${this.baseUrl}search/movie?${this.apiKey}&query=${search.value}`;
+        const searchUrl = `${this.baseUrl}search/movie?${this.apiKey}&query=${search}`;
 
         console.log(searchUrl);
 
-        fetch(searchUrl).then(response => response.json()).then(data => {	
-          console.log(data);	
+        fetch(searchUrl).then(response => response.json()).then(data => {
+          console.log(data);
+
+          this.searchResults = data.results; // array name: results
 
 
           console.log(this.searchResults);
         });
 
-        document.querySelector('form .list-1').classList.remove('hidden');	
+        document.querySelector('form .list-1').classList.remove('hidden');
       }
-
-      // !search.value && document.querySelector('form .list-1').classList.add('hidden');
     },
-    /*
-    SearchShows(search) {
-        if (search && search.length >= 3) {
-          console.log(search);
-    
-          const searchUrl = `${this.baseUrl}search/tv?${this.apiKey}&query=${search}`;
-    
-          console.log(searchUrl);
-    
-          fetch(searchUrl).then(response => response.json()).then(data => {
-            console.log(data);
-    
-            this.searchResults = data.results; // array name: results
-    
-            console.log(this.searchResults);
-          });
-    
-          document.querySelector('form .list-1').classList.remove('hidden');
-        }    
-      }
-      */
   }
+
 })
