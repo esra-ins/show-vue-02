@@ -12,7 +12,6 @@
           <form v-on:click="ChangeVisibilityOfResults()" v-on:keydown="ChangeVisibilityOfResults()" class="h-[46px] w-4/5 inline-flex"> -->
           <form @submit.prevent="movieStore.SearchMovies(search)" class="h-[46px] w-4/5 inline-flex">
             <label class="h-[46px] w-full rounded-full">
-<<<<<<< HEAD
               <input class="w-full h-full rounded-full pl-2 text-black " v-model="search" label="Search"
                 placeholder="Search for a movie, tv show, person......">
               <div class="list-1 bg-white overflow-y-scroll h-[300px] hidden">
@@ -20,15 +19,6 @@
                   {{ movie.title }}
                   {{ movie.vote_average }}
                   <!--  <img :src="movieStore.imgBaseUrl+movie.poster_path" />  -->
-=======
-                <input class="w-full h-full rounded-full pl-2 text-black " v-model="search" label="Search" placeholder="Search for a movie, tv show, person......">
-                <div class="list-1 bg-white overflow-y-scroll h-[300px] hidden">
-                  <div class="movie p-4 text-black" v-for="movie in movieStore.searchResults" :key="movie.id">
-                    {{movie.title}}
-                    {{movie.vote_average}}
-                    <!--  <img :src="movieStore.imgBaseUrl+movie.poster_path" />  -->
-                  </div>
->>>>>>> cdcae9d279ceb1ade6b3afd3742eb12eba74e5de
                 </div>
               </div>
             </label>
@@ -131,19 +121,11 @@ export default {
     onBeforeUnmount(() => {
       debouncedWatch.cancel();
     })
-<<<<<<< HEAD
 
     /*const addToFav = (show) => {
        console.log(show.name);
     }*/
 
-=======
-   
-    const addToFav = (show) => {
-      console.log(show.name);
-    }
- 
->>>>>>> cdcae9d279ceb1ade6b3afd3742eb12eba74e5de
     return {
       // ChangeVisibilityOfResults, // when blank input
       //addToFav,

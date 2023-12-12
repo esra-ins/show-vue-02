@@ -17,11 +17,6 @@
     </div>
 </template>
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> cdcae9d279ceb1ade6b3afd3742eb12eba74e5de
 <script setup>
 import { useMovieStore } from '~/stores/MovieStore';
 
@@ -29,9 +24,4 @@ const movieStore = useMovieStore();
 movieStore.getAll();
 // console.log('...', movieStore.getAll())
 </script> 
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> cdcae9d279ceb1ade6b3afd3742eb12eba74e5de
 <style></style>
