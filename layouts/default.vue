@@ -18,10 +18,15 @@
               </div>
               <div class="mr-8 text-white">
                 <!-- <a href="/movies"> Movies </a> -->
-                <NuxtLink to="/movies"> MOVİES </NuxtLink>
+                <NuxtLink to="/movies/popular"> popular movies </NuxtLink> <br>
+                <NuxtLink to="/movies/topRated"> top rated movies </NuxtLink> <br>
+                <NuxtLink to="/movies/upcoming"> upcoming movies </NuxtLink>
               </div>
               <div class="mr-8 text-white">
-                <NuxtLink to="/shows"> SHOWS </NuxtLink>
+                <!-- <NuxtLink to="/shows"> SHOWS </NuxtLink> -->
+                <NuxtLink to="/shows/popular"> popular shows </NuxtLink> <br>
+                <NuxtLink to="/shows/topRated"> top rated shows </NuxtLink> <br>
+                <NuxtLink to="/shows/onTheAir"> on the air shows </NuxtLink>
               </div>
             </nav>
           </div>
@@ -35,5 +40,4 @@
 <script>
 </script>
 
-<style>
-</style>
+<style></style>
