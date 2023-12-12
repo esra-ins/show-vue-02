@@ -127,7 +127,11 @@ export const useMovieStore = defineStore('movieStore', {
         keys.forEach((key) => {
           result.push(json[key]);
         });
+        keys.forEach((key) => {
+          result.push(json[key]);
+        });
 
+        return result;
         return result;
       }
 
@@ -135,19 +139,25 @@ export const useMovieStore = defineStore('movieStore', {
 
       return Object.values(favMoviesObject).some((item) => {
         return item.id === movie.id;
+        return item.id === movie.id;
       });
     },
+    toggleFav(movie) {
     toggleFav(movie) {
       const isFavorite = ref(Boolean);
       isFavorite.value = this.favMovies.includes(movie);
 
       if (isFavorite.value) {
         this.favMovies = this.favMovies.filter(m => m.id !== movie.id);
+        this.favMovies = this.favMovies.filter(m => m.id !== movie.id);
 
+        isFavorite.value = false;
         isFavorite.value = false;
       } else {
         this.favMovies.push(movie);
+        this.favMovies.push(movie);
 
+        isFavorite.value = true;
         isFavorite.value = true;
       }
 
@@ -294,4 +304,5 @@ export const useMovieStore = defineStore('movieStore', {
     },
     //2end....................................................................................
   }
+
 })
